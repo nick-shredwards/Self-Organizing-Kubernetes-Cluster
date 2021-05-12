@@ -1,0 +1,90 @@
+#FILE IS DEDICATED TO INSTALLING DOCKER
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+#PART 1: Reset and remove old Kubernetes content
+#-----------------------------------------------
+# Reset kubernetes component
+- name: Reset Kubernetes component
+  become: yes
+    shell: "kubeadm reset --force"
+      ignore_errors: True
+
+#Purge previos kubernetes installations
+- name: Remove previous Stuff just in case
+  become: yes
+    apt:
+        state: absent
+	    purge: yes
+	        pkg:
+		    - kubectl
+		        - kubelet
+			    - kubeadm
+			        - kubernetes-cni
+				    - kube*
+				      ignore_errors: yes
+
+#Sudo autoremove
+- name: Sudo autoremove
+  become: yes
+    apt:
+        autoremove: yes
+	  ignore_errors: yes
+
+#Remove previous Docker installations
+- name: Remove previous Docker installations
+  become: yes
+    apt:
+        state: absent
+	    pkg:
+	        - docker
+		    - docker-engine
+		        - docker-ce
+			    - docker.io
+			        - containerd
+				    - runc
+				      ignore_errors: yes
+
+#Remove old files if this script was run before
+- name:  Remove old files if this script was run before
+  become: yes
+    file:
+       path: "{{ item }}"
+          state: absent
+	    loop:
+	        - joincommand.sh
+		    - /usr/initializemaster.sh
+		        - /usr/bin/initializemaster
+			    - /usr/finalizeworker.sh
+			        - /usr/bin/finalizeworker
+				  ignore_errors: yes
+
+
+
+#PART 2: Installing Docker
+#-----------------------------------------------
+# #Updating and Upgrading
+# - name: Updating and Upgrading
+#   become: yes
+#   apt:
+#     update_cache: yes
+#     upgrade: yes
+
+# Downloading Convenience script
+- name: Downloading Convenience script
+  get_url:
+      url: https://get.docker.com
+          dest: "{{ ansible_facts['user_dir'] }}/get-docker.sh"
+	      mode: "0777"
+
+# Running Convenience Script
+- name: Running Convenience Script
+  script: "{{ ansible_facts['user_dir'] }}/get-docker.sh"
+
+# sudo usermod pi -aG docker
+- name: sudo usermod pi -aG docker
+  become: yes
+    user:
+        name: "{{ ansible_facts['user_id'] }}"
+	    groups: docker
+
