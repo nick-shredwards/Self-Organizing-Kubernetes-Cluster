@@ -6,9 +6,7 @@ master () {
     sudo cp -if /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-    curl "https://cloud.weave.works/k8s/v1.16/net.yaml" > cni.yaml
-    sed -i "s/weave-npc:.*\..*\..*'/weave-npc:2.6.5'/g" "cni.yaml" && sed -i "s/weave-kube:.*\..*\..*'/weave-kube:2.6.5'/g" "cni.yaml"
-    kubectl apply -f cni.yaml
+    kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 }
 
