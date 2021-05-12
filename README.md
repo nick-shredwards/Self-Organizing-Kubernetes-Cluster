@@ -3,8 +3,19 @@
 <p> Its purpose is to make the process of creating a Raspberry Pi Kubernetes cluster faster and more convenient. </p>
 
 <br><br>
+<h3>Edits made/to be made to the scripts</h3>
+<list>
+	<p>Changed the command which deploys weave net to ensure the appropriate version is used</p>
+	<p>There are some disrepancies between the filenames of the scripts being deleted and the scripts which are downloaded</p>
+	<p>The initmaster_single script is not executable outside of usr/bin directory, probably due to having multiple users? should now work fine within the usr or usr/bin directory</p>
+	<p>The docker components are not being removed automatically for some reason, creates errors whith the new installation</p>
+	<p>There are some recommended edits suggested after Kubernetes installation, should be addressed</p>
+	<p>Figure out a new ansible-pull command</p>
+	<p>Figure out how to push the worker srcript from master to workers</p>
+	<p>Figure out the new ansible-pull</p>
+</list>
 <h3>To use</h3>
-    <p> To use this playbook, you can use</p>
+    <p> To use this playbook, you can use(outdated)</p>
         <code>ansible-pull -U https://gitlab+deploy-token-20:mSrskwCzBNuj_2fg__au@stogit.cs.stolaf.edu/ansibilize-kubernetes/kubernetes-on-rpios.git</code>
 	<p> Use Kubernetes version 1.21.0-00 and manually remove the all docker components</p>
 	<br>
