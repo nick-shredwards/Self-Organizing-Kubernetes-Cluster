@@ -5,8 +5,8 @@ read $user
 while read ip
 do
     echo "line: $ip"
-    kubeadm token create --print-join-command > joincommand.sh
-    chmod u+x joincommand.sh
-    scp joincommand.sh "$user@$ip"
-    ssh "$user@$ip" sudo ./joincommand.sh
+    kubeadm token create --print-join-command > "joincommand-$ip.sh"
+    chmod u+x "joincommand-$ip.sh"
+    scp "joincommand-$ip.sh" "$user@$ip"
+    ssh "$user@$ip" sudo ./"joincommand-$ip.sh"
     done < ~/nodes.txt
