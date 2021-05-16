@@ -8,8 +8,8 @@ add_workers(){
 	echo "line: $ip"
 	kubeadm token create --print-join-command > "joincommand-$ip.sh"
 	chmod u+x "joincommand-$ip.sh"
-	sudo scp "joincommand-$ip.sh" "$user@$ip:/usr/local/bin"
-	sudo ssh "$user@$ip"  "./usr/local/bin/joincommand-$ip.sh"
+	scp "joincommand-$ip.sh" "$user@$ip:/usr/local/bin"
+	ssh "$user@$ip"  "./usr/local/bin/joincommand-$ip.sh"
 	process_id=$!
 	wait $process_id
 	echo "Exit status: $?"
