@@ -6,11 +6,10 @@ add_workers(){
     while read ip
     do
 	echo "line: $ip"
-	
 	kubeadm token create --print-join-command > "joincommand-$ip.sh"
 	chmod u+x "joincommand-$ip.sh"
-	scp "joincommand-$ip.sh" "$user@$ip:/usr/local/bin"
-	ssh "$user@$ip" "/usr/local/bin/joincommand-$ip.sh"
+	sudo scp "joincommand-$ip.sh" "$user@$ip:/usr/local/bin"
+	sudo ssh "$user@$ip"  "./usr/local/bin/joincommand-$ip.sh"
 	process_id=$!
 	wait $process_id
 	echo "Exit status: $?"
@@ -19,8 +18,7 @@ add_workers(){
 
 if [ "$EUID" -ne 0 ]
 then
-    add_workers
-    #echo "Please run as root"
+    echo "Please run as root"
 else
     add_workers
 fi
