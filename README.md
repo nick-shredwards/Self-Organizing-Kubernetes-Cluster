@@ -60,3 +60,5 @@
 # Self Organizing Clusters with Kubernetes
 
 soc     Cluster Master  musins1,daly1,edward7,quist1    Self Organizing Clusters with Kubernetes
+
+To get the Kubernetes cluster to self organize, follow the above steps to download all necessary software, then run the script ~/soc/add_workers.sh as root to automatically add all available nodes. Ensure you also have root access on all the worker pi nodes for the kubeadm join command that is in the script.
