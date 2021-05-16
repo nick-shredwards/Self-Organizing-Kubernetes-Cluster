@@ -5,11 +5,9 @@ add_workers(){
     read $user
     while read ip
     do
-	echo "line: $ip"
 	kubeadm token create --print-join-command > "joincommand-$ip.sh"
 	chmod u+x "joincommand-$ip.sh"
-	scp "joincommand-$ip.sh" "$user@$ip:/usr/local/bin"
-	ssh "$user@$ip"  "./usr/local/bin/joincommand-$ip.sh"
+	ssh "$user@$ip" 'bash -s' < "joincommand-$ip.sh"
 	process_id=$!
 	wait $process_id
 	echo "Exit status: $?"
