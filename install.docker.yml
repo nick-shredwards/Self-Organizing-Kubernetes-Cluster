@@ -51,15 +51,16 @@
   file:
    path: "{{ item }}"
    state: absent
-	loop:
-	  - joincommand.sh
-		- /usr/initmaster_single.sh
-		- /usr/bin/initmaster_single
-		- /usr/finalizeworker.sh
-		- /usr/bin/finalizeworker
-		- /usr/add_worker.sh
+  loop:
+    - joincommand.sh
+    - /usr/initializemaster.sh
+    - /usr/bin/initializemaster
+    - /usr/finalizeworker.sh
+    - /usr/bin/finalizeworker
+		- /usr/add_worker.yml
 		- /usr/add_worker
-	ignore_errors: yes
+  ignore_errors: yes
+
 
 
 
