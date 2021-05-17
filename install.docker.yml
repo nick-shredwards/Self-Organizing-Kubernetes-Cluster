@@ -53,10 +53,12 @@
           state: absent
 	    loop:
 	        - joincommand.sh
-		    - /usr/initializemaster.sh
-		        - /usr/bin/initializemaster
+		    - /usr/initmaster_single.sh
+		        - /usr/bin/initmaster_single
 			    - /usr/finalizeworker.sh
 			        - /usr/bin/finalizeworker
+				    - /usr/add_worker.sh
+				        - /usr/add_worker
 				  ignore_errors: yes
 
 
