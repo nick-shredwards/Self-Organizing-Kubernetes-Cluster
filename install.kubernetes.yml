@@ -86,7 +86,7 @@
 #PART 4: Creating script for the rest of the joining process
 #-----------------------------------------------------------
 #Creating initmaster_single.sh, finalizeworker.sh and install_loadbal.sh
-- name: Creating initmaster_single.sh, finalizeworker.sh and install_loadbal.sh
+- name: Creating initmaster_single.sh, finalizeworker.sh, install_loadbal.sh, and add_worker.sh
   become: yes
   copy:
     src: "{{ item.source }}"
@@ -97,9 +97,10 @@
     - { source: "finalizeworker.sh", dest: "/usr/finalizeworker.sh"}
     - { source: "initmaster_single.sh", dest: "/usr/initmaster_single.sh"}
     - { source: "install_loadbal.sh", dest: "/usr/install_loadbal.sh"}
+    - { source: "add_worker.sh", dest: "/usr/add_worker.sh"}
 
 #Creating initmaster_single, finalizeworker and install_loadbal links
-- name: Creating initmaster_single, finalizeworker and install_loadbal links
+- name: Creating initmaster_single, finalizeworker, install_loadbal, and add_worker links
   become: yes
   file:
     src: "{{ item.sauce }}"
@@ -109,3 +110,4 @@
     - { sauce: "/usr/finalizeworker.sh", path: "/usr/bin/finalizeworker" }
     - { sauce: "/usr/initmaster_single.sh", path: "/usr/bin/initmaster_single" }
     - { sauce: "/usr/install_loadbal.sh", path: "/usr/bin/install_loadbal" }
+    - { sauce: "/usr/add_worker.sh", path: "/usr/bin/add_worker" }
