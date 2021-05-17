@@ -5,6 +5,7 @@
 <br><br>
 <h3>Edits made/to be made to the scripts</h3>
 <list>
+	<p>REBOOT the worker to fix cgroups error</p>
 	<p>Changed the command which deploys weave net to ensure the appropriate version is used</p>
 	<p>There are some disrepancies between the filenames of the scripts being deleted and the scripts which are downloaded</p>
 	<p>The initmaster_single script is not executable outside of usr/bin directory, probably due to having multiple users? should now work fine within the usr or usr/bin directory</p>
