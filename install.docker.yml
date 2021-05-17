@@ -36,6 +36,7 @@
   become: yes
   apt:
     state: absent
+    purge: yes
     pkg:
     - docker 
     - docker-engine 
@@ -43,6 +44,8 @@
     - docker.io 
     - containerd 
     - runc
+    - containerd.io
+    - docker-ce-cli
   ignore_errors: yes
 
 #Remove old files if this script was run before
@@ -57,8 +60,8 @@
     - /usr/bin/initializemaster
     - /usr/finalizeworker.sh
     - /usr/bin/finalizeworker
-		- /usr/add_worker.yml
-		- /usr/add_worker
+    - /usr/add_worker.yml
+    - /usr/add_worker
   ignore_errors: yes
 
 
