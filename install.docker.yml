@@ -60,8 +60,8 @@
     - /usr/bin/initializemaster
     - /usr/finalizeworker.sh
     - /usr/bin/finalizeworker
-    - /usr/add_worker.yml
-    - /usr/add_worker
+    - /usr/add_workers.sh
+    - /usr/bin/add_workers.sh
   ignore_errors: yes
 
 
