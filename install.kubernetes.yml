@@ -7,26 +7,26 @@
 #Disable swapoff
 - name: Disable swapoff Pi
   become: yes
-    shell: dphys-swapfile swapoff
-      ignore_errors: yes
+  shell: dphys-swapfile swapoff
+  ignore_errors: yes
 
 # Uninstall swapfile
 - name: Uninstall swapfile
   become: yes
-    shell: dphys-swapfile uninstall
-      ignore_errors: yes
+  shell: dphys-swapfile uninstall
+  ignore_errors: yes
 
 # sudo update-rc.d dphys-swapfile remove
 - name: sudo update-rc.d dphys-swapfile remove
   become: yes
-    shell: update-rc.d dphys-swapfile remove
-      ignore_errors: yes
+  shell: update-rc.d dphys-swapfile remove
+  ignore_errors: yes
 
 # Purge swapfile
 - name: Purge swapfile
   become: yes
-    shell: apt purge dphys-swapfile -y
-      ignore_errors: yes
+  shell: apt purge dphys-swapfile -y
+  ignore_errors: yes
 
 
 
@@ -35,11 +35,11 @@
 # cgroup_enable=cpuset cgroup_enable=memory
 - name: Edit cmdline.txt
   become: yes
-    lineinfile:
-        path: /boot/cmdline.txt
-	    backrefs: yes
-	        regexp: "^(console=(?:.*(?<!cgroup_enable=cpuset$|cgroup_enable=memory$)))$"
-		    line: '\1 cgroup_enable=cpuset cgroup_enable=memory'
+  lineinfile:
+    path: /boot/cmdline.txt
+    backrefs: yes
+    regexp: "^(console=(?:.*(?<!cgroup_enable=cpuset$|cgroup_enable=memory$)))$"
+    line: '\1 cgroup_enable=cpuset cgroup_enable=memory'
 
 
 
@@ -48,38 +48,38 @@
 # Reset sudo add key for versions
 - name: https://packages.cloud.google.com/apt/doc/apt-key.gpg
   become: yes
-    apt_key:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
 # Create kubernetes.list
 - name: Create kubernetes.list
   become: yes
-    file:
-        path: /etc/apt/sources.list.d/kubernetes.list
-	    state: touch
+  file:
+    path: /etc/apt/sources.list.d/kubernetes.list
+    state: touch
 
 # Write in kubernetes.list
 - name: write in kubernetes.list
   become: yes
-    lineinfile:
-        path: /etc/apt/sources.list.d/kubernetes.list
-	    line: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+  lineinfile:
+    path: /etc/apt/sources.list.d/kubernetes.list
+    line: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 
 #Update
 - name: Sudo apt-update
   become: yes
-    apt:
-        update_cache: yes
+  apt: 
+    update_cache: yes 
 
 #Install kubectl kubelet and kubeadm
 - name: sudo apt-get install kubectl kubelet and kubeadm
   become: yes
-    apt:
-        force_apt_get: yes
-	    pkg:
-	        - kubeadm={{ kubernetes_v }}
-		    - kubelet={{ kubernetes_v }}
-		        - kubectl={{ kubernetes_v }}
+  apt:
+    force_apt_get: yes
+    pkg:
+    - kubeadm={{ kubernetes_v }}
+    - kubelet={{ kubernetes_v }}
+    - kubectl={{ kubernetes_v }}
 
 
 
@@ -88,25 +88,26 @@
 #Creating initmaster_single.sh, finalizeworker.sh and install_loadbal.sh
 - name: Creating initmaster_single.sh, finalizeworker.sh and install_loadbal.sh
   become: yes
-    copy:
-        src: "{{ item.source }}"
-	    dest: "{{ item.dest }}"
-	        owner: root
-		    mode: '0777'
-		      loop:
-		          - { source: "finalizeworker.sh", dest: "/usr/finalizeworker.sh"}
-			      - { source: "initmaster_single.sh", dest: "/usr/initmaster_single.sh"}
-			          - { source: "install_loadbal.sh", dest: "/usr/install_loadbal.sh"}
+  copy:
+    src: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    mode: '0777'
+  loop:
+    - { source: "finalizeworker.sh", dest: "/usr/finalizeworker.sh"}
+    - { source: "initmaster_single.sh", dest: "/usr/initmaster_single.sh"}
+    - { source: "install_loadbal.sh", dest: "/usr/install_loadbal.sh"}
 
 #Creating initmaster_single, finalizeworker and install_loadbal links
 - name: Creating initmaster_single, finalizeworker and install_loadbal links
   become: yes
-    file:
-        src: "{{ item.sauce }}"
-	    path: "{{ item.path }}"
-	        state: link
-		  loop:
-		      - { sauce: "/usr/finalizeworker.sh", path: "/usr/bin/finalizeworker" }
-		          - { sauce: "/usr/initmaster_single.sh", path: "/usr/bin/initmaster_single" }
-			      - { sauce: "/usr/install_loadbal.sh", path: "/usr/bin/install_loadbal" }
+  file:
+    src: "{{ item.sauce }}"
+    path: "{{ item.path }}"
+    state: link
+  loop:
+    - { sauce: "/usr/finalizeworker.sh", path: "/usr/bin/finalizeworker" }
+    - { sauce: "/usr/initmaster_single.sh", path: "/usr/bin/initmaster_single" }
+    - { sauce: "/usr/install_loadbal.sh", path: "/usr/bin/install_loadbal" }
+
 			      

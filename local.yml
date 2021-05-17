@@ -4,13 +4,13 @@
   remote_user: root
 
   vars_prompt:
-    - name: kubernetes_version
-        prompt: "Insert the version of kubernetes you need to use"
+  - name: kubernetes_version
+    prompt: "Insert the version of kubernetes you need to use"
 
 
   tasks:
-    - include_tasks: "install.docker.yml"
-      - include_tasks: "install.kubernetes.yml"
-          vars:
-	        kubernetes_v: '{{ kubernetes_version }}'
-
+  - include_tasks: "install.docker.yml"
+  - include_tasks: "install.kubernetes.yml"
+    vars:
+      kubernetes_v: '{{ kubernetes_version }}'
+      
