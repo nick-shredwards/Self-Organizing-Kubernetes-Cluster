@@ -109,5 +109,3 @@
     - { sauce: "/usr/finalizeworker.sh", path: "/usr/bin/finalizeworker" }
     - { sauce: "/usr/initmaster_single.sh", path: "/usr/bin/initmaster_single" }
     - { sauce: "/usr/install_loadbal.sh", path: "/usr/bin/install_loadbal" }
-
-			      
