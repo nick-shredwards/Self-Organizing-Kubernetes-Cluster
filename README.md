@@ -6,14 +6,15 @@
 <h3>Edits made/to be made to the scripts</h3>
 <list>
 	<p>REBOOT the worker to fix cgroups error</p>
-	<p>Changed the command which deploys weave net to ensure the appropriate version is used</p>
-	<p>There are some disrepancies between the filenames of the scripts being deleted and the scripts which are downloaded</p>
-	<p>The initmaster_single script is not executable outside of usr/bin directory, probably due to having multiple users? should now work fine within the usr or usr/bin directory</p>
-	<p>The docker components are not being removed automatically for some reason, creates errors whith the new installation</p>
-	<p>There are some recommended edits suggested after Kubernetes installation, should be addressed</p>
-	<p>Figure out a new ansible-pull command</p>
-	<p>Figure out how to push the worker srcript from master to workers</p>
-	<p>Figure out the new ansible-pull</p>
+	<p>Changed the command which deploys weave net to ensure the appropriate version is used DONE</p>
+	<p>There are some disrepancies between the filenames of the scripts being deleted and the scripts which are downloaded DONE Loadbalnce and addworker</p>
+	<p>The initmaster_single script is not executable outside of usr/bin directory, probably due to having multiple users? should now work fine within the usr or usr/bin directory FIGURE OUT HOW TO EXECUTE SCRIPTS FROM ANYWHERE</p>
+	<p>The docker components are not being removed automatically for some reason, creates errors whith the new installation DONE</p>
+	<p>There are some recommended edits suggested after Kubernetes installation, should be addressed CHECK</p>
+	<p>Figure out a new ansible-pull command FIGURE OUT possibly needs ansible developer</p>
+	<p>Figure out how to push the worker srcript from master to workers IMPLEMENT THROUGH ANSIBLE</p>
+	<p>Ansibilize all scripts</p>
+	<p>Deploy key</p>
 </list>
 <h3>To use</h3>
     <p> To use this playbook, you can use(need deploy token from RAB)</p>
