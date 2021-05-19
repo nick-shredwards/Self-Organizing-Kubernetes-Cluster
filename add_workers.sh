@@ -1,6 +1,6 @@
 #!/bin/bash
 add_workers(){
-    awk 'NR!=1' hostfile_temp > ~/nodes.txt
+    awk 'NR!=1' hostfile > ~/nodes.txt
     echo "input username"
     read user
     while read ip
