@@ -1,17 +1,15 @@
 #!/bin/bash
 add_workers(){
-    awk 'NR!=1' hostfile > ~/nodes.txt
+    awk 'NR!=1' hostfile_temp > ~/nodes.txt
     echo "input username"
-    read $user
+    read user
     while read ip
     do
-	kubeadm token create --print-join-command > "joincommand-$ip.sh"
-	scp "joincommand-$ip.sh" "$user@ip"
-	ssh "$user@$ip" chmod u+x "joincommand-$ip.sh"
-	ssh -t "$user@$ip" sudo su root; kubeadm reset; ./"joincommand-$ip.sh"
-	process_id=$!
-	wait $process_id
-	echo "Exit status: $?"
+	echo "ip: $ip" 
+	x=$(kubeadm token create --print-join-command)
+	echo "input password:"
+	read password
+	ssh "$user@$ip" "echo $password | sudo -S $x"
         done < ~/nodes.txt
 }
 
