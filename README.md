@@ -17,8 +17,8 @@
 	<p>Deploy key</p>
 </list>
 <h3>To use</h3>
-    <p> To use this playbook, you can use(need deploy token from RAB)</p>
-        <code>ansible-pull -U https://ADD_DEPLOY_TOKEN_HERE@stogit.cs.stolaf.edu/pdc/s21/soc.git</code>
+    <p> To use this playbook, you can run</p>
+        <code>ansible-pull -U https://gitlab+deploy-token-28:Xg1Ex7rSCySp_rG4fgLz@@stogit.cs.stolaf.edu/pdc/s21/soc.git</code>
 	<p> Use Kubernetes version 1.21.0-00 and manually remove the all docker components</p>
 	<br>
 	<h3>Creation process</h3>
